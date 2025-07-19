@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
       - name: java1
-        image: saikkumar1606:lts
+        image: "saikkumar1606/helm:latest"

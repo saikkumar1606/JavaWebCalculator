@@ -1,19 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mydep
+  name: webapp-0.1-deployment
   labels:
-    app: myapp
+    app: webapp-0.1
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: webapp-0.1
   template:
     metadata:
       labels:
-        app: myapp
+        app: webapp-0.1
     spec:
       containers:
-      - name: java1
-        image: "saikkumar1606/helm:latest"
+      - name: webapp-0.1-container
+        image: saikkumar1606/helm:latest
+        ports:
+        - containerPort: 8080
+        securityContext:
+          runAsUser: 1000  # optional: matches 'jenkins' user
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
